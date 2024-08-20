@@ -23,9 +23,11 @@ const Login = async (req, res, next) => {
     });
 
     res.cookie('token', token, {
-        httpOnly: false,
-        sameSite: 'Strict',
+        httpOnly: true,
+        sameSite: 'None',
         maxAge: 90 * 24 * 60 * 60 * 1000, // 90 days
+        secure : "true",
+
       });
   
 
