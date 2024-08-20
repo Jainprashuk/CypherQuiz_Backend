@@ -24,7 +24,7 @@ const Login = async (req, res, next) => {
 
     res.cookie('token', token, {
       httpOnly: true, // To prevent client-side JS from accessing the cookie
-      same_site: 'None', // Allow cross-site cookies
+      same_site: 'none', // Allow cross-site cookies
       secure: true, // Ensure the cookie is sent over HTTPS
       maxAge: 90 * 24 * 60 * 60 * 1000, // 90 days
     });
