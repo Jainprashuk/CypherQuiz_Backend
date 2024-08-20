@@ -19,10 +19,24 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser()); // Cookie-parser middleware should be before the routes
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://cypher-quiz-frontend.vercel.app'
+];
+
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Define allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'], // Define allowed headers
 }));
+
 
 
 // Define routes
