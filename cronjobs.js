@@ -67,6 +67,6 @@ const evaluateAndNotify = async () => {
   }
 };
 
-// cron.schedule("0 * * * *", evaluateAndNotify);
-// cron.schedule('*/10 * * * * *', evaluateAndNotify);
-setInterval(evaluateAndNotify, 10000);
+// cron.schedule("0 * * * *", evaluateAndNotify);    // 1 hour
+cron.schedule('*/10 * * * * *', evaluateAndNotify);  // 10 sec
+
