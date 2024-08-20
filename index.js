@@ -20,9 +20,9 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser()); // Cookie-parser middleware should be before the routes
 app.use(cors({
-    origin: 'https://cypher-quiz-frontend.vercel.app', // Your frontend URL
-    credentials: true, // Allow cookies and other credentials
-  }));
+  origin: ['http://localhost:5173', 'https://cypher-quiz-frontend.vercel.app'],
+  credentials: true, // This is necessary if you're using cookies
+}));
 
 
 
@@ -38,8 +38,6 @@ app.get('/api/auth/check', async(req, res) => {
     
 
     if (!token) {
-        
-        
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
