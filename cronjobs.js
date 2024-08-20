@@ -26,13 +26,13 @@ const correctAnswers = {
 
 const evaluateAndNotify = async () => {
   try {
-    // Find responses where cronjobdone is false
+    
     const responses = await Response.find({ cronjobdone: false });
 
     for (const response of responses) {
       let score = 0;
 
-      // Evaluate answers
+    // Evaluate answers
       response.answers.forEach((answer) => {
         if (correctAnswers[answer.q_id] === answer.selectedOption) {
           score++;
@@ -68,4 +68,5 @@ const evaluateAndNotify = async () => {
 };
 
 // cron.schedule("0 * * * *", evaluateAndNotify);
-cron.schedule('*/10 * * * * *', evaluateAndNotify);
+// cron.schedule('*/10 * * * * *', evaluateAndNotify);
+setInterval(evaluateAndNotify, 10000);
