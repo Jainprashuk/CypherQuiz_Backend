@@ -67,5 +67,5 @@ const evaluateAndNotify = async () => {
   }
 };
 
-cron.schedule("0 * * * *", evaluateAndNotify);
-// cron.schedule('*/10 * * * * *', evaluateAndNotify);
+// cron.schedule("0 * * * *", evaluateAndNotify);
+cron.schedule('*/10 * * * * *', evaluateAndNotify);
