@@ -23,12 +23,11 @@ const Login = async (req, res, next) => {
     });
 
     res.cookie('token', token, {
-        httpOnly: true,
-        sameSite: 'None',
-        maxAge: 90 * 24 * 60 * 60 * 1000, // 90 days
-        secure : "true",
-
-      });
+      httpOnly: true, // To prevent client-side JS from accessing the cookie
+      sameSite: 'None', // Allow cross-site cookies
+      secure: true, // Ensure the cookie is sent over HTTPS
+      maxAge: 90 * 24 * 60 * 60 * 1000, // 90 days
+    });
   
 
 
