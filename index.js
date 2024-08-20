@@ -31,24 +31,23 @@ app.use('/auth', authrouter);
 app.use(router)
 app.use(GetQuestion)
 
-app.get('/api/auth/check', async(req, res) => {
-    // console.log('Cookies:', req.cookies);
-    const token = req.cookies.token;
-    console.log(token);
-    
+app.get('/api/auth/check', async (req, res) => {
+    // Retrieve the token from the Authorization header
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
+    const token = authHeader.split(' ')[1]; // Extract the token from the header
+    console.log(token);
+
     try {
-        // console.log("problem");
         const verified = jwt.verify(token, 'SecretKey123');
         console.log(verified);
         
         // Assuming you store user information in the token or fetch from the database
         const user = await User.findById(verified._id);
-        // console.log(user);
         
         return res.status(200).json({ user });
     } catch (err) {
