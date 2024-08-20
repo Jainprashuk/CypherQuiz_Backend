@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser()); // Cookie-parser middleware should be before the routes
 app.use(cors({
-    origin: 'http://localhost:5173/',
+    origin: '*',
     credentials: true,
 }));
 
